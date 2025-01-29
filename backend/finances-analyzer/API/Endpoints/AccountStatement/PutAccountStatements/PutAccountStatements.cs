@@ -1,15 +1,17 @@
-﻿namespace API.Endpoints.AccountStatement.AddAccountStatements;
+﻿namespace API.Endpoints.AccountStatement.PutAccountStatements;
 
 public static class PutAccountStatements
 {
     public static RouteGroupBuilder MapPutAccountStatementsEndpoints(this RouteGroupBuilder group)
     {
-        group.MapPut("", (IFormFile[] files, PutAccountStatementCommand command) =>
+        group.MapPut("statements", async (IFormFileCollection files, PutAccountStatementCommand command) =>
         {
-            command.Execute(files);
-            
-            return Task.CompletedTask;
-        });
+            var added = await command.Execute(files);
+
+            return Results.Ok(added);
+        })
+        .DisableAntiforgery()
+        .Produces<PutAccountStatementsResponse>();
 
         return group;
     }

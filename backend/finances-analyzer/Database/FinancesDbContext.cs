@@ -8,7 +8,7 @@ public class FinancesDbContext : DbContext
 {
     public FinancesDbContext()
     {
-        
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     
     public FinancesDbContext(DbContextOptions<FinancesDbContext> options) : base(options) { }
@@ -45,9 +45,9 @@ public class FinancesDbContext : DbContext
         });
     }
     
-    DbSet<BankingAction> BankingActions { get; set; }
+    public DbSet<BankingAction> BankingActions { get; set; }
     
-    DbSet<BankingAccount> BankingAccounts { get; set; }
+    public DbSet<BankingAccount> BankingAccounts { get; set; }
     
-    DbSet<BankingActionGroup> BankingActionGroups { get; set; }
+    public DbSet<BankingActionGroup> BankingActionGroups { get; set; }
 }
