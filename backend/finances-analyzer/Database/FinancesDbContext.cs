@@ -1,5 +1,6 @@
 ﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace Database;
 
@@ -12,6 +13,26 @@ public class FinancesDbContext : DbContext
     
     public FinancesDbContext(DbContextOptions<FinancesDbContext> options) : base(options) { }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+
+            var csBuilder = new NpgsqlConnectionStringBuilder
+            {
+                Database = "analyzerdb",
+                Host = "localhost",
+                Port = 6432,
+                Username = "analyzeruser",
+                Password = "analyzerpass"
+            };
+
+            optionsBuilder.UseNpgsql(csBuilder.ConnectionString);
+        }
+
+        base.OnConfiguring(optionsBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -23,7 +44,7 @@ public class FinancesDbContext : DbContext
                 .WithMany(x => x.BankingActions);
         });
     }
-
+    
     DbSet<BankingAction> BankingActions { get; set; }
     
     DbSet<BankingAccount> BankingAccounts { get; set; }
