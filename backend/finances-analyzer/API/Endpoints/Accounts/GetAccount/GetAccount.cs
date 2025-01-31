@@ -1,6 +1,6 @@
 ﻿using Database.Extensions;
 
-namespace API.Endpoints.AccountStatement.GetAccontStatement;
+namespace API.Endpoints.Accounts.GetAccount;
 
 public static class GetAccount
 {
@@ -18,7 +18,7 @@ public static class GetAccount
         return group;
     }
 
-    public static IServiceCollection AddGetAccount(this IServiceCollection services)
+    public static IServiceCollection AddGetAccountServices(this IServiceCollection services)
     {
         services.AddScoped<GetAccountQuery>();
         

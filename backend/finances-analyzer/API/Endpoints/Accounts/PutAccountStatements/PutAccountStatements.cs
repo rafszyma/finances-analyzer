@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace API.Endpoints.AccountStatement.PutAccountStatements;
+﻿namespace API.Endpoints.Accounts.PutAccountStatements;
 
 public static class PutAccountStatements
 {
@@ -18,7 +16,7 @@ public static class PutAccountStatements
         return group;
     }
 
-    public static IServiceCollection AddPutAccountStatements(this IServiceCollection services)
+    public static IServiceCollection AddPutAccountServices(this IServiceCollection services)
     {
         services.AddScoped<PutAccountStatementCommand>()
             .AddScoped<PdfParser>();

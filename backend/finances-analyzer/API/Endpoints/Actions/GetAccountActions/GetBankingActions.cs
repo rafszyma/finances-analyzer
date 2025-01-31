@@ -1,7 +1,6 @@
-﻿using API.Endpoints.Actions.GetAccountActions;
-using Database.Extensions;
+﻿using Database.Extensions;
 
-namespace API.Endpoints.AccountStatement.GetAccountActions;
+namespace API.Endpoints.Actions.GetAccountActions;
 
 public static class GetActions
 {

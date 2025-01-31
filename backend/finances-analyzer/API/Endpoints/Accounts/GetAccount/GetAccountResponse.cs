@@ -1,4 +1,4 @@
-﻿namespace API.Endpoints.AccountStatement.GetAccontStatement;
+﻿namespace API.Endpoints.Accounts.GetAccount;
 
 public class GetAccountResponse
 {

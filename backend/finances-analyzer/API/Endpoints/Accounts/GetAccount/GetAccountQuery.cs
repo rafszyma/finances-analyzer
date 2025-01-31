@@ -3,7 +3,7 @@ using Database.Entities;
 using Database.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Endpoints.AccountStatement.GetAccontStatement;
+namespace API.Endpoints.Accounts.GetAccount;
 
 public class GetAccountQuery
 {

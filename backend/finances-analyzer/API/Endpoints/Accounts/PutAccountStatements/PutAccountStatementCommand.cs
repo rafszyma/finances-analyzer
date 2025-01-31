@@ -1,6 +1,6 @@
 ﻿using Database;
 
-namespace API.Endpoints.AccountStatement.PutAccountStatements;
+namespace API.Endpoints.Accounts.PutAccountStatements;
 
 public class PutAccountStatementCommand
 {

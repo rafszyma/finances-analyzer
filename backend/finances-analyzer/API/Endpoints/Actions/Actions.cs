@@ -1,6 +1,6 @@
-﻿using API.Endpoints.AccountStatement.GetAccountActions;
+﻿using API.Endpoints.Actions.GetAccountActions;
 
-namespace API.Endpoints.AccountStatement;
+namespace API.Endpoints.Actions;
 
 public static class Actions
 {
