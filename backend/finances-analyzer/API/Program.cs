@@ -5,11 +5,14 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointServices();
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddSerilog();
-builder.Services.AddLogging();
 
 var app = builder.Build();
 

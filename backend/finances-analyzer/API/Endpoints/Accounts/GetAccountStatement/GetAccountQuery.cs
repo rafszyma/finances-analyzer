@@ -1,6 +1,6 @@
-﻿using API.Endpoints.AccountStatement.GetAccountStatement;
-using Database;
+﻿using Database;
 using Database.Entities;
+using Database.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Endpoints.AccountStatement.GetAccontStatement;
@@ -14,12 +14,10 @@ public class GetAccountQuery
         _dbContext = dbContext;
     }
 
-    public async Task<GetAccountResponse> Query(int accountId, GetAccountQueryParameters parameters)
+    public async Task<GetAccountResponse> Query(int accountId, ActionFilter filter)
     {
         var account = await _dbContext.BankingAccounts.FirstAsync(x => x.Id == accountId);
-        var query = _dbContext.BankingActions.Where(x => x.BankingAccount.Id == accountId);
-
-        query = parameters.ApplyFilter(query);
+        var query = _dbContext.BankingActions.ApplyActionFilter(filter).Where(x => x.BankingAccount.Id == accountId);
 
         var actions = await query.ToListAsync();
         

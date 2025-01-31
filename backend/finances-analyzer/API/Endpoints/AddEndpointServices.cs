@@ -6,7 +6,9 @@ public static class ServicesRegister
 {
     public static IServiceCollection AddEndpointServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddAccountStatements();
+        serviceCollection.AddAccountsServices()
+            .AddActionsServices();
+        
         return serviceCollection;
     }
 }

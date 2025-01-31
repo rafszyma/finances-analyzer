@@ -3,9 +3,9 @@ using API.Endpoints.AccountStatement.PutAccountStatements;
 
 namespace API.Endpoints.AccountStatement;
 
-public static class AccountStatements
+public static class Accounts
 {
-    public static WebApplication MapAccountStatementEndpoints(this WebApplication app)
+    public static WebApplication MapAccountsEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("accounts");
 
@@ -14,7 +14,7 @@ public static class AccountStatements
         return app;
     }
 
-    public static IServiceCollection AddAccountStatements(this IServiceCollection services)
+    public static IServiceCollection AddAccountsServices(this IServiceCollection services)
     {
         services.AddPutAccountStatements()
             .AddGetAccount();

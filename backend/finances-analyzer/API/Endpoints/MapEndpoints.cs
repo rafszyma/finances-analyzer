@@ -6,7 +6,8 @@ public static class MapEndpoints
 {
     public static WebApplication MapEndpoint(this WebApplication app)
     {
-        app.MapAccountStatementEndpoints();
+        app.MapAccountsEndpoints()
+            .MapActionsEndpoints();
 
         return app;
     }
