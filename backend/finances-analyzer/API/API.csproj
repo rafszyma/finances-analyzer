@@ -20,10 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Endpoints\Transactions\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Database\Database.csproj" />
     </ItemGroup>
 

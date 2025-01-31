@@ -4,6 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Logging;
 using Utils;
+using StringComparison = System.StringComparison;
 
 namespace Database.Entities;
 
@@ -63,7 +64,10 @@ public enum ActionType
     Outcome,
     Withdrawal,
     Card,
-    Unknown
+    Unknown,
+    Commission,
+    InterestGain,
+    Installment
 }
 
 
@@ -71,12 +75,18 @@ public static class ActionTypeExtensions
 {
     public static ActionType FromStringArray(string[] array, ILogger logger)
     {
+        if (array.Any(x => x.Contains("WYPŁATA", StringComparison.InvariantCultureIgnoreCase)) &&
+            array.Any(x => x.Contains("BANKOMATU", StringComparison.InvariantCultureIgnoreCase)))
+        {
+            return ActionType.Withdrawal;
+        }
+        
         if (array.Any(x => x.Contains("BLIK", StringComparison.InvariantCultureIgnoreCase)))
         {
             return ActionType.BLIK;
         }
 
-        if (array.Any(x => x.Contains("PRZYCHODZĄCY", StringComparison.InvariantCultureIgnoreCase)))
+        if (array.Any(x => x.Contains("PRZYCHODZĄCY", StringComparison.InvariantCultureIgnoreCase)) || array.Any(x => x.Contains("WPŁATA", StringComparison.InvariantCultureIgnoreCase)))
         {
             return ActionType.Income;
         }
@@ -86,7 +96,26 @@ public static class ActionTypeExtensions
             return ActionType.Card;
         }
         
-        if (array.Any(x => x.Contains("WYCHODZĄCY", StringComparison.InvariantCultureIgnoreCase)))
+        if (array.Any(x => x.Contains("PROWIZJA", StringComparison.InvariantCultureIgnoreCase)) || 
+            array.Any(x => x.Contains("OBCIĄŻENIE", StringComparison.InvariantCultureIgnoreCase)))
+        {
+            return ActionType.Commission;
+        }
+        
+        if (array.Any(x => x.Contains("UZNANIE", StringComparison.InvariantCultureIgnoreCase)))
+        {
+            return ActionType.InterestGain;
+        }
+        
+        if (array.Any(x => x.Contains("SPŁ.RATY-REGULARNA", StringComparison.InvariantCultureIgnoreCase)))
+        {
+            return ActionType.Installment;
+        }
+        
+        if (array.Any(x => x.Contains("WYCHODZĄCY", StringComparison.InvariantCultureIgnoreCase) ||
+                           x.Contains("STAŁE", StringComparison.InvariantCultureIgnoreCase)) || 
+            (array.Any(x => x.Contains("NA", StringComparison.InvariantCultureIgnoreCase)) &&
+             array.Any(x => x.Contains("TELEFONU", StringComparison.InvariantCultureIgnoreCase))))
         {
             return ActionType.Outcome;
         }

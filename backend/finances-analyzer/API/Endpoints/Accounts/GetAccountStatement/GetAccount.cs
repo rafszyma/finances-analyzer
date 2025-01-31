@@ -1,15 +1,14 @@
-﻿using API.Endpoints.AccountStatement.GetAccontStatement;
-using API.Endpoints.AccountStatement.GetAccountStatement;
+﻿using Database.Extensions;
 
-namespace API.Endpoints.AccountStatement.GetAccountActionsQuery;
+namespace API.Endpoints.AccountStatement.GetAccontStatement;
 
-public static class GetAccountActions
+public static class GetAccount
 {
     public static RouteGroupBuilder MapGetAccountEndpoints(this RouteGroupBuilder group)
     {
-        group.MapGet("{accountId}", async (int accountId, [AsParameters]GetAccountQueryParameters parameters, GetAccountQuery query) =>
+        group.MapGet("{accountId}", async (int accountId, [AsParameters]ActionFilter filter, GetAccountQuery query) =>
             {
-                var response = await query.Query(accountId, parameters);
+                var response = await query.Query(accountId, filter);
 
                 return Results.Ok(response);
             })
