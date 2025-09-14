@@ -19,7 +19,8 @@ public static class Accounts
     public static IServiceCollection AddAccountsServices(this IServiceCollection services)
     {
         services.AddPutAccountServices()
-            .AddGetAccountServices();
+            .AddGetAccountServices()
+            .AddPatchAccountServices();
         
         return services;
     }

@@ -12,5 +12,7 @@ public class BankingAccount
     
     public string Label { get; set; }
     
+    public string? Color { get; set; }
+    
     public IList<BankingAction> BankingActions { get; set; } = new List<BankingAction>();
 }

@@ -34,6 +34,9 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
                     b.Property<string>("Label")
                         .IsRequired()
                         .HasColumnType("text");
@@ -51,8 +54,8 @@ namespace Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTimeOffset>("AccountingDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("AccountingDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("ActionType")
                         .HasColumnType("integer");

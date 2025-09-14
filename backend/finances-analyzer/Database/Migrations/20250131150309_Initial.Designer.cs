@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Database.Migrations
 {
     [DbContext(typeof(FinancesDbContext))]
-    [Migration("20250129123906_Initial")]
+    [Migration("20250131150309_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -37,6 +37,9 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
                     b.Property<string>("Label")
                         .IsRequired()
                         .HasColumnType("text");
@@ -54,8 +57,8 @@ namespace Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTimeOffset>("AccountingDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateTime>("AccountingDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("ActionType")
                         .HasColumnType("integer");

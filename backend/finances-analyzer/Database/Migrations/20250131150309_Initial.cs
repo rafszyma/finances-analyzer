@@ -19,7 +19,8 @@ namespace Database.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AccountNumber = table.Column<string>(type: "text", nullable: false),
-                    Label = table.Column<string>(type: "text", nullable: false)
+                    Label = table.Column<string>(type: "text", nullable: false),
+                    Color = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,7 +48,7 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AccountingDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    AccountingDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Value = table.Column<double>(type: "double precision", nullable: false),
                     Balance = table.Column<double>(type: "double precision", nullable: false),
                     ActionType = table.Column<int>(type: "integer", nullable: false),
